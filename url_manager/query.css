@@ -1,0 +1,67 @@
+@charset "utf-8";
+body{
+	min-height:500px; max-height:3500px;
+	width:auto;
+}
+
+
+.input-box-ui{
+    width:100%;
+    margin-right: 20px;
+    margin-left: 20px;
+    vertical-align: top;
+	text-align:center;	
+    position:relative;
+}
+
+.op-name {
+    width:60px;
+}
+
+.input-box {
+    width:100%;
+    position:relative;
+}
+
+.box-ui{
+    width:100%;
+	text-align:center;	
+}
+
+.store-ui-table{
+    width:100%;
+    border-collapse:collapse;
+	border:1px solid #C3D9FF;
+}
+
+.store-ui-table tfoot, .store-ui-table thead{
+	text-align:center;	
+	font-weight:bold;
+	background-color:#ECF2FF;
+	height:14px;
+}
+.store-ui-table thead th, .store-ui-table tbody tr td{
+	padding:2px 2px;
+    border-right:1px solid #AAA;
+	text-align:center;
+	border:1px solid #C3D9FF;
+	font-size:12px;
+}
+.store-ui-table tr.alter{
+	background-color:#EAF2F5;
+}
+.store-ui-table tbody tr.headline, .store-ui-table tbody tr:hover{
+	background-color:#ededed;
+}
+.store-ui-clickable-color{
+	color: #1C3E7C;
+}
+
+a, a:link, a:visited, a:hover, a:active{
+	color: #1C3E7C;
+	text-decoration: none;
+}
+a:hover{
+	text-decoration: underline;
+}
+

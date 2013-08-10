@@ -1,0 +1,33 @@
+这个项目由第4组完成，成员有：
+waynezheng
+sherardliu
+samxzhang
+trifezuo
+
+
+分成3个模块：
+1. 下载 ./shell/s_download.sh
+	输入：1) 需要下载的序号i
+		  2) 需要下载的url
+		  3) 下载的URL的md5
+	输出：1) 下载的文件需要保存的路径 url_path
+	
+2. 分析，搜索HTML文件中的URL： ./shell/s_search_urls.sh
+	输入：1) HTML文件 url_filepath
+	输出：1) 分析出的URL列表保存的文件 out_urls，格式 url
+
+3. 去重，将第2步骤提取的URL_LIST与已经存在的URL进行去重。
+	输入：1) 新的url列表文件 in_htmls，格式 url
+	输出：1) 去重之后的url列表文件 out_htmls，格式 url \t md5
+最终用 ./shell/spider_ctl.sh 将各个模块串起来。
+流程是：
+1. 下载
+2. 搜索
+3. 去重
+4. 追加
+5. 返回第1步骤
+其中共享了部分的参数设置，在 ./shell/s_var_export.sh 中，每一个模块都执行了 source ./shell/s_var_export.sh 保证多个模块共享变量，即是说共享文件。包括：
+1. 未下载URL文件列表 unvisited，在这里实际上是包括已经下载的所有文件，格式 url \t md5
+2. 已经下载的URL文件列表 visited，已经被下载并且确认是文本文件（HTML），格式 url \t md5 \t filepath
+3. 尝试过下载的文件（包括下载成功和失败的文件）列表 download_md5，格式 url \t md5
+
