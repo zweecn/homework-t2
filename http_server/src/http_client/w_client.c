@@ -51,9 +51,9 @@ int main(int argc, char *argv[])
     char buffer[__buf_size];
 
     char * file = "/index.html";
-    if (argc = 1)
+    if (argc == 1)
     {
-        file == argv[1];
+        file = argv[1];
     }
 
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
