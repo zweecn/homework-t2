@@ -1,0 +1,22 @@
+objects = w_httpserver.o w_server.o w_epoll.o
+objects_c = w_client.o 
+
+all_t = w_server w_client
+
+all : w_server w_client 
+.PHONY : all clean
+
+w_server: $(objects)
+	g++ -o w_server $(objects) 
+w_client: $(objects_c)
+	g++ -o w_client $(objects_c) 
+
+w_server.o : w_server.cpp
+w_client.o : w_client.c
+
+w_httpserver.o : w_httpserver.h
+w_epoll.o : w_epoll.h
+
+clean : 
+	rm $(all_t) *.o
+
