@@ -12,12 +12,12 @@
 #include "w_epoll.h"
 #include "w_httpserver.h"
 
-const char* __ip = "127.0.0.1";
+//const char* __ip = "127.0.0.1";
 const int __port = 8888;
 const int __max_listen = 5;
 const int __max_events = 100;
 const int __filename_size = 256;
-const int __buf_size = 1024;
+const int __buf_size = 1024*10;
 
 int W_Epoll::make_http_res(char* res_buf, const char* req_buf)
 {
@@ -36,7 +36,8 @@ int W_Epoll::make_http_res(char* res_buf, const char* req_buf)
     int hd_size = 0, res_size = 0;
     if (ct_size > 0)
     {
-        hd_size = hs.make_header(hd_buf, __buf_size, 200, "text/html", ct_size);
+        //hd_size = hs.make_header(hd_buf, __buf_size, 200, "text/html", ct_size);
+        hd_size = hs.make_header(hd_buf, __buf_size, 200, "application/octet-stream", ct_size);
         res_size = hs.make_body(res_buf, __buf_size, hd_buf, hd_size, ct_buf, ct_size); 
     }
     else
@@ -76,7 +77,8 @@ int W_Epoll::create_and_bind()
     memset(&addr_serv, 0, sizeof(addr_serv));
     addr_serv.sin_family = AF_INET;
     addr_serv.sin_port = htons(__port);
-    addr_serv.sin_addr.s_addr = inet_addr(__ip);
+    //addr_serv.sin_addr.s_addr = inet_addr(__ip);
+    addr_serv.sin_addr.s_addr = INADDR_ANY;
 
     if (bind(sock_fd,(struct sockaddr *)&addr_serv,sizeof(struct sockaddr_in)) < 0) 
     {
@@ -156,8 +158,8 @@ int W_Epoll::run()
             {
                 bzero(send_buf, sizeof(send_buf));
                 //sprintf(send_buf, "server proc got %d bytes\n", recv_num);
-                make_http_res(send_buf, recv_buf);
-                send_num = send(events[i].data.fd, send_buf, strlen(send_buf), 0);
+                int http_res_size = make_http_res(send_buf, recv_buf);
+                send_num = send(events[i].data.fd, send_buf, http_res_size, 0);
                 if (send_num <= 0) 
                 {
                     close(events[i].data.fd);

@@ -10,7 +10,6 @@
 
 #include "w_httpserver.h"
 
-const int __buf_size = 1024;
 
 const char* wwwroot = "wwwroot";
 const char* nofound = "wwwroot/404.html";

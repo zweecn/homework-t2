@@ -1,4 +1,4 @@
-SUB_DIRS = http_server http_client
+SUB_DIRS = http_server http_client tools 
 
 .PHONY: all $(SUB_DIRS) clean install
 

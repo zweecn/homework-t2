@@ -3,7 +3,7 @@ include config.mak
 INSTALL_DIR = $(shell pwd)/bin
 export INSTALL_DIR
 
-INCLUDE_DIR += -I$(shell pwd)/include
+INCLUDE_DIR += -I$(shell pwd)/src/include
 export INCLUDE_DIR
 
 SUB_DIRS = src
